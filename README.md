@@ -21,7 +21,7 @@ The process works as follows:
 ## Setup
 
 1.  **Add Environment Variables to your Bitbucket repository:**
-    *   `GEMINI_API_KEY`: Your Gemini API key. Needs to be configured in Bitbucket repository settings under "Repository variables".
+    *   `GEMINI_API_KEY`: Your Gemini API key. Needs to be configured in Bitbucket repository settings under "Repository variables". **For Enterprise users, configure GOOGLE_API_KEY instead. Details [here](https://github.com/google-gemini/gemini-cli/tree/main?tab=readme-ov-file#option-3-vertex-ai).**
     *   `ACCESS_TOKEN`: Your Bitbucket access token with permissions to comment on pull requests(PR Write). Needs to be configured in Bitbucket repository settings under "Repository variables".
     *   `BITBUCKET_WORKSPACE`: The workspace where your repository is located. Runtime variable provided by Bitbucket Pipelines.
     *   `BITBUCKET_REPO_slug`: The slug of your repository. Runtime variable provided by Bitbucket Pipelines.

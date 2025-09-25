@@ -1,0 +1,24 @@
+image: node:22
+
+clone:
+  depth: full
+
+pipelines:
+  pull-requests:
+    '**':
+      - step:
+          name: PR Review
+          script:
+            - npm install -g @google/gemini-cli
+            - export GEMINI_API_KEY=$(echo $GEMINI_API_KEY)
+            - export ACCESS_TOKEN=$(echo $ACCESS_TOKEN)
+            - export BITBUCKET_WORKSPACE=$(echo $BITBUCKET_WORKSPACE)
+            - export BITBUCKET_REPO_SLUG=$(echo $BITBUCKET_REPO_SLUG)
+            - export BITBUCKET_PR_ID=$(echo $BITBUCKET_PR_ID)
+            - gemini -p "Perform code review using instructions in @REVIEW.md" -y
+            - > 
+              curl -X POST 
+              --header "Content-Type: application/json" 
+              --header "Authorization: Bearer $ACCESS_TOKEN" 
+              --data @payload.json 
+              --url "https://api.bitbucket.org/2.0/repositories/$BITBUCKET_WORKSPACE/$BITBUCKET_REPO_SLUG/pullrequests/$BITBUCKET_PR_ID/comments" 

@@ -23,8 +23,19 @@ The process works as follows:
 ## Setup
 
 1.  **Add Environment Variables to your Bitbucket repository:**
-    *   `GEMINI_API_KEY`: Your Gemini API key. Needs to be configured in Bitbucket repository settings under "Repository variables". **For Enterprise users, configure GOOGLE_API_KEY instead. Details [here](https://github.com/google-gemini/gemini-cli/tree/main?tab=readme-ov-file#option-3-vertex-ai).**
-    *   `ACCESS_TOKEN`: Your Bitbucket access token with permissions to comment on pull requests(PR Write). Needs to be configured in Bitbucket repository settings under "Repository variables".
+    
+    Use Vertex AI(**Enterprise users**):
+
+    *   `GOOGLE_API_KEY`: Your Google Cloud API key. Needs to be configured in Bitbucket repository settings under "Repository variables". **For Enterprise users, configure GOOGLE_API_KEY. [Details here](https://github.com/google-gemini/gemini-cli/tree/main?tab=readme-ov-file#option-3-vertex-ai).**
+    *   `GOOGLE_GENAI_USE_VERTEXAI`: Set to `true` to use Vertex AI for code reviews. Needs to be configured in Bitbucket repository settings under "Repository variables". [Details here.](https://github.com/google-gemini/gemini-cli/blob/main/docs/get-started/authentication.md#non-interactive-mode--headless-environments)
+
+    Use Gemini API Key
+
+    *   `GEMINI_API_KEY`: Your Gemini API key. Needs to be configured in Bitbucket repository settings under "Repository variables". **For Enterprise users, configure GOOGLE_API_KEY instead.**
+    
+    Bitbucket specific variables:
+
+    *   `REPO_ACCESS_TOKEN`: Your Bitbucket repository access token with permissions to comment on pull requests(**PR Write**). Needs to be configured in Bitbucket repository settings under "Repository variables".
     *   `BITBUCKET_WORKSPACE`: The workspace where your repository is located. Runtime variable provided by Bitbucket Pipelines.
     *   `BITBUCKET_REPO_slug`: The slug of your repository. Runtime variable provided by Bitbucket Pipelines.
     *   `BITBUCKET_PR_ID`: The ID of the pull request. This is automatically set by Bitbucket Pipelines.

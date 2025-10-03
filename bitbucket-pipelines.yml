@@ -10,11 +10,18 @@ pipelines:
           name: PR Review
           script:
             - npm install -g @google/gemini-cli
-            - export GEMINI_API_KEY=$(echo $GEMINI_API_KEY)
-            - export ACCESS_TOKEN=$(echo $ACCESS_TOKEN)
+            # Bitbucket Repo Access Token
+            - export REPO_ACCESS_TOKEN=$(echo $REPO_ACCESS_TOKEN)
+            # Using Vertex AI option - Enterprise users
+            - export GOOGLE_API_KEY=$(echo $GOOGLE_API_KEY)
+            - export GOOGLE_GENAI_USE_VERTEXAI=true
+            # Using Gemini option
+            # - export GEMINI_API_KEY=$(echo $GEMINI_API_KEY)
+            # PR specific variables
             - export BITBUCKET_WORKSPACE=$(echo $BITBUCKET_WORKSPACE)
             - export BITBUCKET_REPO_SLUG=$(echo $BITBUCKET_REPO_SLUG)
             - export BITBUCKET_PR_ID=$(echo $BITBUCKET_PR_ID)
+            # Review instructions
             - gemini -p "Perform code review using instructions in @REVIEW.md" -y
             - > 
               curl -X POST 
